@@ -1,4 +1,4 @@
-package ru.dankoy.geoclusteranalysis;
+package ru.dankoy.geoclusteranalysis.config;
 
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
