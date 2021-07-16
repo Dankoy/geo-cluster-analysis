@@ -10,21 +10,21 @@ import ru.dankoy.geoclusteranalysis.core.model.Crash;
 import ru.dankoy.geoclusteranalysis.flyway.MigrationsExecutor;
 import ru.dankoy.geoclusteranalysis.flyway.MigrationsExecutorFlyway;
 
-@Configuration
+//@Configuration
 public class HibernateConfig implements WebMvcConfigurer {
 
-    public static final String HIBERNATE_CFG_FILE = "hibernate.cfg.xml";
-
-    @Bean(initMethod = "executeMigrations")
-    public MigrationsExecutor migrationsExecutor() {
-        return new MigrationsExecutorFlyway(HIBERNATE_CFG_FILE);
-    }
-
-    @Bean
-    @DependsOn("migrationsExecutor")
-    public SessionFactory sessionFactory() {
-        return HibernateUtils
-                .buildSessionFactory(HIBERNATE_CFG_FILE, Crash.class);
-    }
+//    public static final String HIBERNATE_CFG_FILE = "hibernate.cfg.xml";
+//
+//    @Bean(initMethod = "executeMigrations")
+//    public MigrationsExecutor migrationsExecutor() {
+//        return new MigrationsExecutorFlyway(HIBERNATE_CFG_FILE);
+//    }
+//
+//    @Bean
+//    @DependsOn("migrationsExecutor")
+//    public SessionFactory sessionFactory() {
+//        return HibernateUtils
+//                .buildSessionFactory(HIBERNATE_CFG_FILE, Crash.class);
+//    }
 
 }
