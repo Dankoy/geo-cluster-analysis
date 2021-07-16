@@ -36,7 +36,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 
-    implementation("com.h2database:h2")
     implementation("org.hibernate:hibernate-core")
 
     implementation("ch.qos.logback:logback-classic")
@@ -50,7 +49,6 @@ dependencies {
 
     implementation("org.hibernate:hibernate-hikaricp")
     implementation("com.zaxxer:HikariCP")
-    implementation("com.h2database:h2")
 
     implementation('org.postgresql:postgresql:42.2.19')
 
