@@ -9,6 +9,7 @@ import ru.dankoy.geoclusteranalysis.core.model.Crash;
 
 public class KMeansPlusPlusImpl extends KMeansImpl {
 
+  private final Random rand = new Random();
 
   @Override
   public List<Cluster> cluster(List<Crash> crashes, int amountOfClusters)
@@ -27,36 +28,82 @@ public class KMeansPlusPlusImpl extends KMeansImpl {
   /**
    * Рассчитывает и получает оптимальные центроиды при старте алгоритма
    *
-   * @param crashes a список из аварий {@link Crash}
+   * @param crashes список из аварий {@link Crash}
    * @return список центроидов с оптимальным центром
    */
   private List<Cluster> getPerfectClusterCentroids(List<Crash> crashes, int amountOfClusters) {
 
-    var sum = 0;
+    var sum = 0D;
 
-    var clusters = new ArrayList<>();
-    Random rand = new Random();
+    List<Cluster> clusters = new ArrayList<>();
 
-    // nextInt is normally exclusive of the top value,
-    // so add 1 to make it inclusive
+    // Первый центроид выбирается рандомно
     int randomNum = rand.nextInt((crashes.size() - 1) + 1) + 1;
+    Cluster centroid = new ClusterImpl(crashes.get(randomNum).getLatitude(),
+        crashes.get(randomNum).getLongitude());
 
+    // Цикл по количеству кластеров ищет наиболее подходящие точки
     for (var i = 1; i <= amountOfClusters; i++) {
 
-      // Первый центроид выбирается рандомно
-      Cluster firstCentroid = new ClusterImpl(crashes.get(randomNum).getLatitude(),
-          crashes.get(randomNum).getLatitude());
+      clusters.add(centroid);
 
-      clusters.add(firstCentroid);
+      for (Crash crash : crashes) {
 
-      // Считается дистанция от аварии до центроида
-      sum += crashes.stream().mapToDouble(crash -> haversineDistance(crash, firstCentroid))
-          .map(distance -> distance * distance).mapToInt(distance -> (int) distance).sum();
+        sum = addDistanceToSum(sum, crash, centroid);
 
+      }
+
+      // Получаем магическое число которое подскажет, где следующий центроид
+      var magicNumber = getRandomSum(sum);
+
+      // считается сумма расстояний пока эта сумма не станет больше чем магическое число
+      sum = 0;
+      for (Crash crash : crashes) {
+
+        sum = addDistanceToSum(sum, crash, centroid);
+
+        if (sum >= magicNumber) {
+          centroid = new ClusterImpl(crash.getLatitude(), crash.getLongitude());
+          break;
+        }
+      }
 
     }
 
-    return null;
+    // Заполняет кластера авариями
+    addCrashesToCluster(crashes, clusters);
+
+    return clusters;
+  }
+
+  /**
+   * Считает квадрат расстояния точки до центроида и суммирует это значение с переданной суммой
+   *
+   * @param sum      сумма
+   * @param crash    авария
+   * @param centroid центроид
+   * @return сумму предыдущего значения суммы с квадратом расстояния
+   */
+  private double addDistanceToSum(double sum, Crash crash, Cluster centroid) {
+
+    var distance = haversineDistance(crash, centroid);
+    distance = distance * distance;
+
+    sum = sum + distance;
+    return sum;
+
+  }
+
+  /**
+   * Возвращает магическое число, по которому можно определить координату следующего центроида
+   *
+   * @param sum высчитанная сумма квадратов расстояний от центроида до каждой точки
+   * @return магическое число
+   */
+  private double getRandomSum(double sum) {
+
+    return rand.nextDouble() * sum;
+
   }
 
 }
