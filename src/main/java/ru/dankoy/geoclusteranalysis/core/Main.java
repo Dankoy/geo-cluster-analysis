@@ -3,7 +3,9 @@ package ru.dankoy.geoclusteranalysis.core;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import ru.dankoy.geoclusteranalysis.cluster.Cluster;
+import ru.dankoy.geoclusteranalysis.clusteralgorithms.kmeans.KMeans;
 import ru.dankoy.geoclusteranalysis.clusteralgorithms.kmeans.KMeansImpl;
+import ru.dankoy.geoclusteranalysis.clusteralgorithms.kmeans.KMeansPlusPlusImpl;
 import ru.dankoy.geoclusteranalysis.core.hibernate.dao.CrashDaoHibernateImpl;
 import ru.dankoy.geoclusteranalysis.core.hibernate.sessionmanager.SessionManagerHibernate;
 import ru.dankoy.geoclusteranalysis.core.hibernate.utils.HibernateUtils;
@@ -40,7 +42,7 @@ public class Main {
 //                        -76.65502996534478);
         System.out.println(crashes.size());
 
-        KMeansImpl kMeans = new KMeansImpl();
+        KMeans kMeans = new KMeansPlusPlusImpl();
         List<Cluster> clusters = kMeans.cluster(crashes, 20);
 
 
