@@ -1,5 +1,6 @@
 package ru.dankoy.geoclusteranalysis.clusteralgorithms.kmeans;
 
+import java.util.List;
 import ru.dankoy.geoclusteranalysis.cluster.Cluster;
 import ru.dankoy.geoclusteranalysis.core.model.Crash;
 
@@ -43,4 +44,31 @@ public interface KMeans {
         centroid.getLongitude());
   }
 
+  /**
+   * Заполняет кластера авариями рандомно. Нужен для инициализации кластеров.
+   *
+   * @param crashes  список аварий {@link Crash}
+   * @param clusters список кластеров {@link Cluster}
+   */
+  default void addCrashesToCluster(List<Crash> crashes, List<Cluster> clusters) {
+    // Заполняет кластера авариями
+    var i = 0;
+    for (Crash crash : crashes) {
+      clusters.get(i).getPoints().add(crash);
+      i++;
+      if (i == clusters.size()) {
+        i = 0;
+      }
+    }
+  }
+
+  /**
+   * Главный метод кластеризации
+   *
+   * @param crashes          a список из аварий {@link Crash}
+   * @param amountOfClusters количество кластеров
+   * @return список кластеров
+   */
+  List<Cluster> cluster(List<Crash> crashes, int amountOfClusters) throws IllegalArgumentException,
+      CloneNotSupportedException;
 }

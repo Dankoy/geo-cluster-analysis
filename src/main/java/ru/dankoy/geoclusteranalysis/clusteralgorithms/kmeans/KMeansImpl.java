@@ -23,15 +23,13 @@ import ru.dankoy.geoclusteranalysis.core.model.Crash;
  * 1) Ищутся ближайшие точки к центру кластера. Рассточние от точки до центра кластера считается по формуле haversine.
  * 2) Центр кластеров пересчитывается
  * <p>
- * Шаг 2 повторяется до тех пор пока кластера из предыдущей итерации не будут отличатся от текущей итерации.
+ * Шаг 2 повторяется до тех пор, пока кластера из предыдущей итерации не будут отличатся от текущей итерации.
  * <p>
  * На больших данных работает достаточно медленно
  */
 @Service
 public class KMeansImpl implements KMeans {
 
-    // Радиус земли в метрах
-    public static final double EARTH_RADIUS = 6372.8 * 1000;
     private static final Logger logger = LoggerFactory.getLogger(KMeansImpl.class);
 
     /**
@@ -41,6 +39,7 @@ public class KMeansImpl implements KMeans {
      * @param amountOfClusters количество кластеров
      * @return список кластеров
      */
+    @Override
     public List<Cluster> cluster(List<Crash> crashes, int amountOfClusters) throws IllegalArgumentException,
             CloneNotSupportedException {
 
@@ -113,14 +112,7 @@ public class KMeansImpl implements KMeans {
         }
 
         // Заполняет кластера авариями
-        var i = 0;
-        for (Crash crash : crashes) {
-            clusters.get(i).getPoints().add(crash);
-            i++;
-            if (i == amountOfClusters) {
-                i = 0;
-            }
-        }
+        addCrashesToCluster(crashes, clusters);
         return clusters;
     }
 
