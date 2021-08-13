@@ -1,12 +1,13 @@
 package ru.dankoy.geoclusteranalysis.web.controllers;
 
 import java.util.List;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.dankoy.geoclusteranalysis.cluster.Cluster;
-import ru.dankoy.geoclusteranalysis.clusteralgorithms.kmeans.KMeansImpl;
+import ru.dankoy.geoclusteranalysis.clusteralgorithms.kmeans.KMeans;
 import ru.dankoy.geoclusteranalysis.core.model.Crash;
 import ru.dankoy.geoclusteranalysis.core.service.crashservice.DBServiceCrash;
 
@@ -14,9 +15,10 @@ import ru.dankoy.geoclusteranalysis.core.service.crashservice.DBServiceCrash;
 public class KMeansClusterRestController {
 
     private final DBServiceCrash dbServiceCrash;
-    private final KMeansImpl kMeans;
+    private final KMeans kMeans;
 
-    public KMeansClusterRestController(DBServiceCrash dbServiceCrash, KMeansImpl kMeans) {
+    public KMeansClusterRestController(DBServiceCrash dbServiceCrash,
+        @Qualifier("KMeansPlusPlusImpl") KMeans kMeans) {
         this.dbServiceCrash = dbServiceCrash;
         this.kMeans = kMeans;
     }
