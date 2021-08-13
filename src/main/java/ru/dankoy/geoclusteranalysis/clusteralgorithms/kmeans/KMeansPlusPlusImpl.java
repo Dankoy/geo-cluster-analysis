@@ -3,10 +3,12 @@ package ru.dankoy.geoclusteranalysis.clusteralgorithms.kmeans;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import org.springframework.stereotype.Service;
 import ru.dankoy.geoclusteranalysis.cluster.Cluster;
 import ru.dankoy.geoclusteranalysis.cluster.ClusterImpl;
 import ru.dankoy.geoclusteranalysis.core.model.Crash;
 
+@Service
 public class KMeansPlusPlusImpl extends KMeansImpl {
 
   private final Random rand = new Random();
