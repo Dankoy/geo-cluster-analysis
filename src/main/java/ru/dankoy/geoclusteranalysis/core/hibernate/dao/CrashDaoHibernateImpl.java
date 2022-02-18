@@ -14,6 +14,7 @@ import ru.dankoy.geoclusteranalysis.core.hibernate.sessionmanager.DatabaseSessio
 import ru.dankoy.geoclusteranalysis.core.hibernate.sessionmanager.SessionManagerHibernate;
 import ru.dankoy.geoclusteranalysis.core.model.Crash;
 import ru.dankoy.geoclusteranalysis.core.sessionmanager.SessionManager;
+import ru.dankoy.geoclusteranalysis.core.sessionmanager.SessionManagerException;
 
 @Repository
 public class CrashDaoHibernateImpl implements CrashDao {
