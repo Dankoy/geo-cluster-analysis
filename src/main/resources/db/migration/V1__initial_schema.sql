@@ -1,5 +1,3 @@
-create database accidents;
-
 create table crashes
 (
     report_number                VARCHAR(100),
