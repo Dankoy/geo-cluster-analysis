@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: 'evawe/geo-cluster-analysis:latest'
+    container_name: app
+    ports:
+        - "8080:8080"
+    networks:
+      - geo-cluster-network
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+    restart: always
+
+          
+  db:
+    image: 'postgres:latest'
+    container_name: db
+    ports:
+        - "5433:5432"
+    environment:
+      - POSTGRES_USER=turtality
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=accidents
+    networks:
+      - geo-cluster-network
+
+networks:
+  geo-cluster-network:
+    name: geo-cluster-network
+
+
