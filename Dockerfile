@@ -13,8 +13,6 @@
 #ENTRYPOINT ["java", "-jar", "app.jar"]
 
 FROM --platform=linux/arm64/v8  eclipse-temurin:17
-RUN adduser spring && adduser spring spring
-USER spring:spring
 ARG JAR_FILE=build/libs/*.jar
 COPY ${JAR_FILE} app.jar
 RUN ls -la
