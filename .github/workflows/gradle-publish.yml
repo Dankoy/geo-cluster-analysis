@@ -7,9 +7,7 @@
 
 name: Gradle Package and docker hub push
 
-on:
-  release:
-    types: [created]
+on: [workflow_dispatch]
 
 jobs:
   build:
