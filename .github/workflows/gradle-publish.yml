@@ -51,6 +51,6 @@ jobs:
       with:
         context: .
         push: true
-        tags: user/geo-cluster-analysis:latest
+        tags: evawe/geo-cluster-analysis:latest
        
      
