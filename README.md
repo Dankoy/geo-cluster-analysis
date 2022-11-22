@@ -80,16 +80,16 @@
 
 1) При первом запуске приложения открывается карта с зумом 12, считаются кластера по авариям с пешеходами
    
-   ![] (https://github.com/Dankoy/cluster_analyze-images/blob/main/images/Screenshot_2021-04-28-cluster.png?raw=true)
+   ![pic1](https://github.com/Dankoy/cluster_analyze-images/blob/main/images/Screenshot_2021-04-28-cluster.png?raw=true)
 
 2) Можно выбирать какие данные получать из базы. Для этого в правом верхнем углу страницы есть селектор и кнопка
 
-   ![] (https://github.com/Dankoy/cluster_analyze-images/blob/main/images/Screenshot_2021-04-28-cluster1.png?raw=true)
+   ![pic1](https://github.com/Dankoy/cluster_analyze-images/blob/main/images/Screenshot_2021-04-28-cluster1.png?raw=true)
 
 3) При изменении зума или границ карты кластеры высчитываются заново
 
-   ![] (https://github.com/Dankoy/cluster_analyze-images/blob/main/images/Screenshot_2021-04-28-cluster2.png?raw=true)
-   ![] (https://github.com/Dankoy/cluster_analyze-images/blob/main/images/Screenshot_2021-04-28-cluster3.png?raw=true)
+   ![pic1](https://github.com/Dankoy/cluster_analyze-images/blob/main/images/Screenshot_2021-04-28-cluster2.png?raw=true)
+   ![pic2](https://github.com/Dankoy/cluster_analyze-images/blob/main/images/Screenshot_2021-04-28-cluster3.png?raw=true)
 
 
 
